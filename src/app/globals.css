@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .home {
+    @apply no-scrollbar flex w-full flex-row max-xl: max-h-screen max-xl: overflow-y-scroll;
+  }
+}
