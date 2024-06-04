@@ -1,5 +1,5 @@
 import React from "react";
-import { formatCurrentBalance } from "../../../libs/utils";
+import { formatCurrentBalance } from "../../../lib/utils";
 import AnimatedCounter from "./AnimatedCounter";
 import Chart from "./Chart";
 

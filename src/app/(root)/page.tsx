@@ -5,7 +5,7 @@ import React from "react";
 const Home = () => {
   return (
     <section className="home">
-      <div className="home-Content">
+      <div className="home-content">
         <header className="home-header">
           <TopSection
             type="base"
@@ -16,7 +16,7 @@ const Home = () => {
           <BalanceBox
             accounts={[]}
             banks={1}
-            current_balance={123123.23}
+            current_balance={696969.23}
           />
         </header>
       </div>

@@ -54,7 +54,6 @@
   .header-2 {
     @apply text-[18px] leading-6 font-semibold text-gray-200;
   }
-
   .header-box {
     @apply flex flex-col gap-1;
   }
@@ -67,7 +66,12 @@
   .home {
     @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll;
   }
-
+  .home-content {
+    @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
+  }
+  .home-header {
+    @apply flex flex-col justify-between gap-6;
+  }
   .sidebar {
     @apply sticky left-0 top-0 flex h-screen w-fit flex-col  justify-between border-r border-zinc-800 bg-inherit pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
   }
@@ -77,7 +81,7 @@
   }
 
   .sidebar-link {
-    @apply flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start;
+    @apply flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-xl justify-center xl:justify-start;
   }
 
   .sidebar-label {
