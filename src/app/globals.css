@@ -51,11 +51,17 @@
   .balance-amnt {
     @apply text-[24px] leading-6 font-semibold text-gray-200 flex-1;
   }
+  .bank-card {
+    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white  backdrop-blur-[6px];
+  }
   .banks {
     @apply flex flex-col justify-between gap-2 px-6 py-4;
   }
   .banner {
     @apply h-[120px] w-full bg-gradient-to-r from-cyan-500 to-blue-500 bg-cover bg-no-repeat;
+  }
+  .card-content {
+    @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-gray-700 px-5 pb-4 pt-5;
   }
 
   .header-2 {

@@ -9,6 +9,11 @@ declare interface BalanceBoxProps {
   banks: number;
   current_balance: number;
 }
+declare interface CardProps {
+  account: Account;
+  user_name: string;
+  show_balance?: boolean;
+}
 
 declare interface ChartProps {
   accounts: Account[];
