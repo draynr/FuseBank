@@ -43,7 +43,7 @@
 
 @layer utilities {
   .balance {
-    @apply flex w-full items-center gap-4 rounded-xl border border-slate-800 p-4 /*shadow-chart*/ sm:gap-6 sm:p-6;
+    @apply flex w-full items-center justify-center gap-4 rounded-xl border border-slate-800 p-4 /*shadow-chart*/ sm:gap-6 sm:p-6;
   }
   .balance-label {
     @apply text-[14px] leading-6 font-medium text-slate-300;
@@ -51,21 +51,27 @@
   .balance-amnt {
     @apply text-[24px] leading-6 font-semibold text-gray-200 flex-1;
   }
+
   .bank-card {
-    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white  backdrop-blur-[6px];
+    @apply gradient relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white  backdrop-blur-[6px] shadow-lg;
   }
   .banks {
     @apply flex flex-col justify-between gap-2 px-6 py-4;
   }
   .banner {
-    @apply h-[120px] w-full bg-gradient-to-r from-cyan-500 to-blue-500 bg-cover bg-no-repeat;
+    @apply h-[120px] rounded-xl w-full bg-gradient-to-r from-cyan-500 to-blue-500 bg-cover bg-no-repeat;
   }
   .card-content {
-    @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-gray-700 px-5 pb-4 pt-5;
+    @apply gradient relative z-10 flex size-full max-w-[288px] flex-col justify-between rounded-l-[20px] gradient px-5 pb-4 pt-5;
   }
-
+  .card-icon {
+    @apply flex flex-col items-end justify-between rounded-r-[20px] gradient bg-cover bg-center bg-no-repeat py-5 pr-5 ml-2;
+  }
+  .gradient {
+    @apply bg-gradient-to-r from-gray-800 to-gray-600;
+  }
   .header-2 {
-    @apply text-[18px] leading-6 font-semibold text-gray-200;
+    @apply text-[26px] leading-6 font-semibold text-gray-200;
   }
   .header-box {
     @apply flex flex-col gap-1;
@@ -92,13 +98,13 @@
     @apply flex gap-3 items-center p-4 rounded-xl w-full max-w-60;
   }
   .profile {
-    @apply relative flex px-6 max-xl:justify-center;
+    @apply relative flex px-10 justify-center;
   }
   .profile-image {
     @apply flex items-center justify-center absolute -top-8 size-24 rounded-xl  bg-gray-200 border-8 border-white p-2 shadow;
   }
   .profile-info {
-    @apply flex flex-col pt-24;
+    @apply flex flex-row pt-20;
   }
   .profile-name {
     @apply text-[24px] font-semibold text-white;
@@ -111,7 +117,7 @@
     @apply flex h-16 items-center justify-between p-5 sm:p-8 md:hidden;
   }
   .right-sidebar {
-    @apply no-scrollbar h-screen max-h-screen flex-col border-l xl:flex min-w-[300px] xl:overflow-y-scroll hidden border-slate-800;
+    @apply no-scrollbar h-[700px] max-h-screen flex-row border rounded-xl  xl:overflow-x-scroll  border-slate-800;
   }
 
   .sidebar {

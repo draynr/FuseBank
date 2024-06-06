@@ -22,36 +22,37 @@ const RightSideBar = ({
             <h1 className="profile-name">
               {user.first_name}
               {""} {user.last_name}
+              <p className="profile-email">
+                {user.email}
+              </p>
             </h1>
-            <p className="profile-email">
-              {user.email}
-            </p>
           </div>
         </div>
       </section>
-      <section className="banks">
-        <div className="flex w-full justify-between">
+      <section className="banks ">
+        <div className="flex w-full justify-center items-center">
           <h2 className="header-2">
             Linked Banks
-          </h2>
-          <Link
-            href="/"
-            className="flex gap-1 text-white"
-          >
-            <Image
-              src="/icons/add.svg"
-              alt="add"
-              width={25}
-              height={25}
-            />
-            <h2 className="text-[16px] text-white font-semibold">
+            <Link
+              href="/"
+              className="flex mt-3 text-white items-center justify-center"
+            >
+              <Image
+                src="/icons/add.svg"
+                alt="add"
+                width={30}
+                height={30}
+                className="flex leading-5"
+              />
+              {/* <h2 className="text-[16px] text-white font-semibold">
               Add
-            </h2>
-          </Link>
+            </h2> */}
+            </Link>
+          </h2>
         </div>
         {banks?.length > 0 && (
-          <div className="relative flex flex-col flex-1 items-center justify-center gap-5">
-            <div className="text-white relative z-10">
+          <div className="relative flex flex-col flex-1 items-center justify-center gap-4 mt-10">
+            <div className="bg-transparent text-white relative z-10">
               <Card
                 key={banks[0].$id}
                 account={banks[0]}
@@ -60,7 +61,7 @@ const RightSideBar = ({
               />
             </div>
             {banks[1] && (
-              <div className="text-white absolute right-0 top-8 z-0 w-[90%]">
+              <div className="bg-transparent text-white absolute z-0 mt-20 ml-20">
                 <Card
                   key={banks[1].$id}
                   account={banks[1]}

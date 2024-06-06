@@ -19,6 +19,11 @@ const Home = () => {
             user_name={"DEV"}
             subtext="Manage your bank accounts in one place."
           />
+          <RightSideBar
+            user={logged_in}
+            transactions={[]}
+            banks={[{}, {}, {}]}
+          />
           <BalanceBox
             accounts={[]}
             banks={1}
@@ -27,11 +32,6 @@ const Home = () => {
         </header>
         TRANSACTIONS
       </div>
-      <RightSideBar
-        user={logged_in}
-        transactions={[]}
-        banks={[{}, {}, {}]}
-      />
     </section>
   );
 };
