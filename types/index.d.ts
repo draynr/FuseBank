@@ -14,6 +14,15 @@ declare interface ChartProps {
   accounts: Account[];
 }
 
+declare interface NavBarProps {
+  user: User;
+}
+
+declare interface RightSideBarProps {
+  user: User;
+  transactions: Transaction[];
+  banks: Bank[] & Account[];
+}
 declare interface SideProps {
   user: User;
 }

@@ -9,6 +9,11 @@ export const SideItems = [
     route: "/banks",
     label: "Banks",
   },
+  {
+    img_url: "/icons/transactions.svg",
+    route: "/transactions",
+    label: "Transactions",
+  },
 ];
 
 export default SideItems;

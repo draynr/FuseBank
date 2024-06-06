@@ -17,7 +17,7 @@ const ibm = IBM_Plex_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "FuseBank",
+  title: "Fuse",
   description:
     "Currently in development stages.",
   icons: { icon: "/icons/logo.svg" },
