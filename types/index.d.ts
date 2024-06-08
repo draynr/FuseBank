@@ -1,8 +1,5 @@
-declare interface TopSectionProps {
-  type?: "title" | "base";
-  title: string;
-  user_name: string;
-  subtext: string;
+declare interface AuthProps {
+  type: string;
 }
 declare interface BalanceBoxProps {
   accounts: Account[];
@@ -32,6 +29,12 @@ declare interface SideProps {
   user: User;
 }
 
+declare interface TopSectionProps {
+  type?: "title" | "base";
+  title: string;
+  user_name: string;
+  subtext: string;
+}
 declare type User = {
   $id: string;
   email: string;

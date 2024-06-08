@@ -14,10 +14,6 @@ const BalanceBox = ({
         <Chart accounts={accounts} />
       </div>
       <div className="flex flex-col gap-6">
-        {/* // don't think this is necessary */}
-        {/* <h2 className="header-2">
-          Bank Accounts: {banks}
-        </h2> */}
         <div className="flex flex-col gap-2">
           <p className="balance-label">
             Current Balance

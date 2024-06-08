@@ -14,7 +14,7 @@ const RightSideBar = ({
         <div className="banner" />
         <div className="profile">
           <div className="profile-image">
-            <span className="text-5xl font-bold text-blue-600 bg-inherit">
+            <span className="text-5xl font-bold text-white bg-transparent">
               {"J"}
             </span>
           </div>
