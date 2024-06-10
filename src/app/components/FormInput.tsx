@@ -13,12 +13,12 @@ import {
   FieldPath,
 } from "react-hook-form";
 import { z } from "zod";
-import { authFormSchema } from "@/lib/utils";
+import { authFormSchema } from "../../../lib/utils";
 import { Input } from "@/components/ui/input";
 
-const formSchema = authFormSchema("sign-up");
+const formSchema = authFormSchema("register");
 
-interface CustomInput {
+interface FormInput {
   control: Control<z.infer<typeof formSchema>>;
   name: FieldPath<z.infer<typeof formSchema>>;
   label: string;
@@ -30,7 +30,7 @@ const FormInput = ({
   name,
   label,
   placeholder,
-}: CustomInput) => {
+}: FormInput) => {
   return (
     <FormField
       control={control}
