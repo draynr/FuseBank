@@ -137,6 +137,15 @@
   .mobile_sheet_close {
     @apply flex gap-3 items-center p-4 rounded-xl w-full max-w-60;
   }
+  .plaid-link-default {
+    @apply flex justify-start cursor-pointer gap-3 rounded-lg bg-transparent flex-row;
+  }
+  .plaid-link-primary {
+    @apply text-[16px] rounded-lg border gradient font-semibold text-white shadow-amber-500;
+  }
+  .plaid-link-ghost {
+    @apply flex cursor-pointer items-center justify-center gap-3 rounded-lg px-3 py-7 hover:bg-white lg:justify-start;
+  }
   .profile {
     @apply relative flex px-10 justify-center;
   }

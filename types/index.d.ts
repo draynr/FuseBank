@@ -15,6 +15,10 @@ declare interface CardProps {
 declare interface ChartProps {
   accounts: Account[];
 }
+declare interface ExchangeProps {
+  publicToken: string;
+  user: User;
+}
 declare interface FooterProps {
   user: User;
   type?: "mobile" | "desktop";
@@ -27,6 +31,10 @@ declare interface NavBarProps {
 declare interface LoginParameters {
   email: string;
   password: string;
+}
+declare interface PlaidProps {
+  user: User;
+  variant: string;
 }
 declare interface RegisterParameters {
   email: string;
@@ -71,4 +79,13 @@ declare type User = {
   zip_code: string;
   dob: string;
   ssn: string;
+};
+declare type Bank = {
+  $id: string;
+  account_id: string;
+  bank_id: string;
+  access_token: string;
+  funding_source: string;
+  user_id: string;
+  invite_id: string;
 };

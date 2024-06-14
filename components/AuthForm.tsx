@@ -32,6 +32,7 @@ import {
   login,
   register,
 } from "../lib/actions/actions";
+import PlaidLinking from "./PlaidLink";
 
 const AuthForm = ({ type }: AuthProps) => {
   const router = useRouter();
@@ -119,7 +120,10 @@ const AuthForm = ({ type }: AuthProps) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-          {/*Plaid*/}
+          <PlaidLinking
+            user={user}
+            variant="primary"
+          />
         </div>
       ) : (
         <>
