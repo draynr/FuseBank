@@ -15,9 +15,30 @@ declare interface CardProps {
 declare interface ChartProps {
   accounts: Account[];
 }
+declare interface FooterProps {
+  user: User;
+  type?: "mobile" | "desktop";
+}
 
 declare interface NavBarProps {
   user: User;
+}
+
+declare interface LoginParameters {
+  email: string;
+  password: string;
+}
+declare interface RegisterParameters {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+  primaryAddress?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  dob?: string;
+  ssn?: string;
 }
 
 declare interface RightSideBarProps {
@@ -43,10 +64,11 @@ declare type User = {
   dwolla_customer_id: string;
   first_name: string;
   last_name: string;
-  address1: string;
+  name: string;
+  primaryAddress: string;
   city: string;
   state: string;
   zip_code: string;
-  date_of_birth: string;
+  dob: string;
   ssn: string;
 };

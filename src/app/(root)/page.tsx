@@ -1,14 +1,12 @@
-import BalanceBox from "../components/BalanceBox";
-import RightSideBar from "../components/RightSideBar";
-import TopSection from "../components/TopSection";
+import BalanceBox from "../../../components/BalanceBox";
+import RightSideBar from "../../../components/RightSideBar";
+import TopSection from "../../../components/TopSection";
 import React from "react";
+import { getLoggedInUser } from "../../../lib/actions/actions";
 
-const Home = () => {
-  const logged_in = {
-    first_name: "John",
-    last_name: "Doe",
-    email: "test@gmail.com",
-  };
+const Home = async () => {
+  const logged_in = await getLoggedInUser();
+  // console.log(logged_in.name);
   return (
     <section className="home">
       <div className="home-content">
@@ -16,7 +14,9 @@ const Home = () => {
           <TopSection
             type="base"
             title="Hello,"
-            user_name={"DEV"}
+            user_name={
+              logged_in.name.split(" ")[0]
+            }
             subtext="Manage your bank accounts in one place."
           />
           <RightSideBar

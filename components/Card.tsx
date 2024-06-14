@@ -1,9 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import {
-  cn,
-  formatAmount,
-} from "../../../lib/utils";
+import { cn, formatAmount } from "../lib/utils";
 import Image from "next/image";
 
 const Card = ({

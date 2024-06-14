@@ -1,18 +1,20 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import Image from "next/image";
-import MobileNavBar from "../components/MobileNavBar";
+import MobileNavBar from "../../../components/MobileNavBar";
+import { getLoggedInUser } from "../../../lib/actions/actions";
+import { Router } from "lucide-react";
+import { redirect } from "next/navigation";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const logged_in = {
-    //fill in rest of the user object fields
-    first_name: "John",
-    last_name: "Doe",
-  };
+  const logged_in = await getLoggedInUser();
+  if (!logged_in) {
+    redirect("/login");
+  }
   return (
     <main className="flex h-screen w-full font-inter">
       <Sidebar user={logged_in} />

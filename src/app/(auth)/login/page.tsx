@@ -1,9 +1,9 @@
-import AuthForm from "@/app/components/AuthForm";
+import AuthForm from "../../../../components/AuthForm";
 import React from "react";
 
 const Login = () => {
   return (
-    <section className="flex-center size-full max-sm:px-6">
+    <section className="flex-center h-screen w-screen max-sm:px-6">
       <AuthForm type="login" />
     </section>
   );

@@ -13,7 +13,7 @@ import {
   FieldPath,
 } from "react-hook-form";
 import { z } from "zod";
-import { authFormSchema } from "../../../lib/utils";
+import { authFormSchema } from "../lib/utils";
 import { Input } from "@/components/ui/input";
 
 const formSchema = authFormSchema("register");
