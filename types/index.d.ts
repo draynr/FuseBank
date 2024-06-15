@@ -39,14 +39,14 @@ declare interface PlaidProps {
 declare interface RegisterParameters {
   email: string;
   password: string;
-  firstName?: string;
-  lastName?: string;
-  primaryAddress?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-  dob?: string;
-  ssn?: string;
+  firstName: string;
+  lastName: string;
+  primaryAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  dateOfBirth: string;
+  ssn: string;
 }
 
 declare interface RightSideBarProps {
@@ -67,17 +67,17 @@ declare interface TopSectionProps {
 declare type User = {
   $id: string;
   email: string;
-  user_id: string;
-  dwolla_customer_url: string;
-  dwolla_customer_id: string;
-  first_name: string;
-  last_name: string;
+  userId: string;
+  dwollaCustomerUrl: string;
+  dwollaCustomerId: string;
+  firstName: string;
+  lastName: string;
   name: string;
   primaryAddress: string;
   city: string;
   state: string;
-  zip_code: string;
-  dob: string;
+  postalCode: string;
+  dateOfBirth: string;
   ssn: string;
 };
 declare type Bank = {
@@ -89,3 +89,48 @@ declare type Bank = {
   user_id: string;
   invite_id: string;
 };
+
+declare interface getUserInfoProps {
+  userId: string;
+}
+
+declare interface createBankAccountProps {
+  user_id: string;
+  bank_id: string;
+  account_id: string;
+  access_token: string;
+  funding_source: string;
+  invite_id: string;
+}
+
+/*DWOLLA*/
+
+declare interface AddFundingSourceParams {
+  dwollaCustomerId: string;
+  processorToken: string;
+  bankName: string;
+}
+declare interface CreateFundingSourceOptions {
+  customerId: string;
+  fundingSourceName: string;
+  plaidToken: string;
+  _links: object;
+}
+declare interface NewDwollaCustomerParams {
+  firstName: string;
+  lastName: string;
+  email: string;
+  type: string;
+  address1: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  dateOfBirth: string;
+  ssn: string;
+}
+
+declare interface TransferParams {
+  sourceFundingSourceUrl: string;
+  destinationFundingSourceUrl: string;
+  amount: string;
+}

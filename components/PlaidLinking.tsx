@@ -10,7 +10,10 @@ import {
   PlaidLinkOnSuccess,
   usePlaidLink,
 } from "react-plaid-link";
-import { createLinkToken } from "../lib/actions/actions";
+import {
+  createLinkToken,
+  exchangePublicToken,
+} from "../lib/actions/actions";
 
 const PlaidLinking = ({
   user,
@@ -18,6 +21,7 @@ const PlaidLinking = ({
 }: PlaidProps) => {
   const [token, setToken] = useState("");
   const router = useRouter();
+  // console.log(user.$id);
   useEffect(() => {
     const getLinkToken = async () => {
       const data = await createLinkToken(user);
@@ -25,13 +29,14 @@ const PlaidLinking = ({
     };
     getLinkToken();
   }, [user]);
+  console.log(token);
   const onSuccess =
     useCallback<PlaidLinkOnSuccess>(
       async (public_token: string) => {
-        //   await exchangePublicToken({
-        //     publicToken: public_token,
-        //     user,
-        //   })
+        await exchangePublicToken({
+          publicToken: public_token,
+          user,
+        });
         router.push("/");
       },
       [user]
@@ -41,6 +46,7 @@ const PlaidLinking = ({
     onSuccess,
   };
   const { open, ready } = usePlaidLink(config);
+
   return (
     <>
       {variant === "primary" ? (

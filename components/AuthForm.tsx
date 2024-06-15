@@ -32,7 +32,7 @@ import {
   login,
   register,
 } from "../lib/actions/actions";
-import PlaidLinking from "./PlaidLink";
+import PlaidLinking from "./PlaidLinking";
 
 const AuthForm = ({ type }: AuthProps) => {
   const router = useRouter();
@@ -56,16 +56,24 @@ const AuthForm = ({ type }: AuthProps) => {
   ) => {
     setIsLoading(true);
     try {
+      console.log(data);
+      const userStruct = {
+        email: data.email!,
+        password: data.password!,
+        firstName: data.firstName!,
+        lastName: data.lastName!,
+        primaryAddress: data.primaryAddress!,
+        city: data.city!,
+        state: data.state!,
+        postalCode: data.postalCode!,
+        dateOfBirth: data.dateOfBirth!,
+        ssn: data.ssn!,
+      };
       if (type === "register") {
-        const userStruct = {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          password: data.password,
-        };
         const newUserStruct = await register(
           userStruct
         );
+        console.log(userStruct);
         // console.log(newUserStruct);
         setUser(newUserStruct);
       } else if (type == "login") {
@@ -171,7 +179,7 @@ const AuthForm = ({ type }: AuthProps) => {
                     />
                     <FormInput
                       control={form.control}
-                      name="zipCode"
+                      name="postalCode"
                       label="Zip Code"
                       placeholder="Enter your zip code."
                     />
@@ -179,7 +187,7 @@ const AuthForm = ({ type }: AuthProps) => {
                   <div className="flex gap-4">
                     <FormInput
                       control={form.control}
-                      name="dob"
+                      name="dateOfBirth"
                       label="Date of Birth"
                       placeholder="mm-dd-yyyy"
                     />

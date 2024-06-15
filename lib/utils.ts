@@ -16,6 +16,18 @@ export function formatCurrentBalance(
   return formatter.format(balance);
 }
 
+export function extractCustomerIdFromUrl(
+  url: string
+) {
+  const partition = url.split("/");
+  const customer_id =
+    partition[partition.length - 1];
+  return customer_id;
+}
+export function encrypt(id: string) {
+  return btoa(id);
+}
+
 export const authFormSchema = (type: string) =>
   z.object({
     firstName:
@@ -38,11 +50,11 @@ export const authFormSchema = (type: string) =>
       type === "login"
         ? z.string().optional()
         : z.string().min(2).max(2),
-    zipCode:
+    postalCode:
       type === "login"
         ? z.string().optional()
         : z.string().min(3).max(6),
-    dob:
+    dateOfBirth:
       type === "login"
         ? z.string().optional()
         : z.string().date(),

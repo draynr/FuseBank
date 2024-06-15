@@ -8,7 +8,6 @@ import {
 import { ID } from "node-appwrite";
 import { cookies } from "next/headers";
 import { json } from "stream/consumers";
-import { Database } from "lucide-react";
 import {
   CountryCode,
   ProcessorTokenCreateRequest,
@@ -17,6 +16,55 @@ import {
 } from "plaid";
 import { plaidClient } from "../server/plaid";
 import { revalidatePath } from "next/cache";
+import {
+  addFundingSource,
+  createDwollaCustomer,
+} from "./dwolla_actions";
+import {
+  encrypt,
+  extractCustomerIdFromUrl,
+} from "../utils";
+import { Database } from "lucide-react";
+import { consoleIntegration } from "@sentry/nextjs";
+
+const {
+  APPWRITE_DATABASE_ID: DATABASE_ID,
+  APPWRITE_USER_COLLECTION_ID:
+    USER_COLLECTION_ID,
+  APPWRITE_BANK_COLLECTION_ID:
+    BANK_COLLECTION_ID,
+} = process.env;
+
+export const createBankAccount = async ({
+  user_id,
+  bank_id,
+  account_id,
+  access_token,
+  funding_source,
+  invite_id,
+}: createBankAccountProps) => {
+  try {
+    const { database } =
+      await createAdminClient();
+    const bankAccount =
+      await database.createDocument(
+        DATABASE_ID!,
+        BANK_COLLECTION_ID!,
+        ID.unique(),
+        {
+          user_id,
+          bank_id,
+          account_id,
+          access_token,
+          funding_source,
+          invite_id,
+        }
+      );
+    return JSON.parse(
+      JSON.stringify(bankAccount)
+    );
+  } catch (e) {}
+};
 
 export const login = async ({
   email,
@@ -37,22 +85,62 @@ export const login = async ({
     console.log(e);
   }
 };
-export const register = async (
-  data: RegisterParameters
-) => {
+export const register = async ({
+  password,
+  ...data
+}: RegisterParameters) => {
+  let newUser;
   try {
-    const { account } =
+    const { account, database } =
       await createAdminClient();
-    const newUser = await account.create(
+    newUser = await account.create(
       ID.unique(),
       data.email,
-      data.password,
+      password,
       `${data.firstName} ${data.lastName}`
     );
+    if (!newUser)
+      throw new Error("Error creating user.");
+    const args: NewDwollaCustomerParams = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      type: "personal",
+      address1: data.primaryAddress,
+      city: data.city,
+      state: data.state,
+      postalCode: data.postalCode,
+      dateOfBirth: data.dateOfBirth,
+      ssn: data.ssn,
+    };
+    // console.log(args);
+    const dwollaCustomerUrl =
+      await createDwollaCustomer(args);
+    if (!dwollaCustomerUrl) {
+      throw new Error(
+        "Error creating dwolla customer."
+      );
+    }
+    const dwollaCustomerId =
+      extractCustomerIdFromUrl(
+        dwollaCustomerUrl
+      );
+    const userStruct =
+      await database.createDocument(
+        DATABASE_ID!,
+        USER_COLLECTION_ID!,
+        ID.unique(),
+        {
+          ...data,
+          userId: newUser.$id,
+          dwollaCustomerUrl: dwollaCustomerUrl,
+          dwollaCustomerId: dwollaCustomerId,
+        }
+      );
     const sesh =
       await account.createEmailPasswordSession(
         data.email,
-        data.password
+        password
       );
     cookies().set(
       "appwrite-session",
@@ -64,7 +152,9 @@ export const register = async (
         secure: true,
       }
     );
-    return JSON.parse(JSON.stringify(newUser));
+    return JSON.parse(
+      JSON.stringify(userStruct)
+    );
   } catch (e) {
     console.log(e);
   }
@@ -114,20 +204,24 @@ export const createLinkToken = async (
       user: {
         client_user_id: user.$id,
       },
+      client_name: `${user.firstName} ${user.lastName}`,
+      products: ["auth"] as Products[],
       language: "en",
       country_codes: ["US"] as CountryCode[],
-      client_name: user.name,
-      products: ["auth"] as Products[],
     };
+
     const response =
       await plaidClient.linkTokenCreate(
         tokenParams
       );
+
     return JSON.parse(
-      JSON.stringify(response.data.link_token)
+      JSON.stringify({
+        linkToken: response.data.link_token,
+      })
     );
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -164,10 +258,9 @@ export const exchangePublicToken = async ({
       token_response.data.processor_token;
     const funding_source =
       await addFundingSource({
-        dwollaCustomerId:
-          user.dwolla_customer_id,
-        processor_token,
-        bank_name: data.name,
+        dwollaCustomerId: user.dwollaCustomerId,
+        processorToken: processor_token,
+        bankName: data.name,
       });
     if (!funding_source) throw Error;
     await createBankAccount({
