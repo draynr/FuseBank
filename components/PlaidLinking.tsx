@@ -55,12 +55,12 @@ const PlaidLinking = ({
           disabled={!ready}
           className="plaid-link-primary"
         >
-          Link Bank Account
+          Start Link
         </Button>
       ) : variant === "ghost" ? (
-        <Button>Link Bank Account</Button>
+        <Button>Start Link</Button>
       ) : (
-        <Button> Link Bank Account</Button>
+        <Button>Start Link</Button>
       )}
     </>
   );

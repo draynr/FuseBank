@@ -23,6 +23,7 @@ export async function createSessionClient() {
   if (!session || !session.value) {
     throw new Error("No session");
   }
+  // console.log("working");
 
   client.setSession(session.value);
 

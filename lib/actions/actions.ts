@@ -5,7 +5,7 @@ import {
   createAdminClient,
   createSessionClient,
 } from "../server/appwrite";
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { cookies } from "next/headers";
 import { json } from "stream/consumers";
 import {
@@ -164,12 +164,16 @@ export async function getLoggedInUser() {
   try {
     const { account } =
       await createSessionClient();
+    console.log("hello");
+    debugger;
+    console.log("hello");
     const response = await account.get();
     const user = await getUserInfo({
       userId: response.$id,
     });
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
+    console.log("wtf");
     return null;
   }
 }
@@ -189,8 +193,16 @@ export const getUserInfo = async ({
   userId,
 }: getUserInfoProps) => {
   try {
-    // const {db} = await createAdminClient();
-    // const user = await Database.
+    const { database } =
+      await createAdminClient();
+    const user = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    );
+    return JSON.parse(
+      JSON.stringify(user.documents[0])
+    );
   } catch (e) {
     return null;
   }

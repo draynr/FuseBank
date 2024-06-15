@@ -141,7 +141,7 @@
     @apply flex justify-start cursor-pointer gap-3 rounded-xl bg-transparent flex-row;
   }
   .plaid-link-primary {
-    @apply text-[16px] rounded-xl  gradient font-semibold text-white;
+    @apply text-[16px] rounded-xl  bg-gradient-to-r from-slate-900 to-slate-800 font-semibold text-white;
   }
   .plaid-link-ghost {
     @apply flex cursor-pointer items-center justify-center gap-3 rounded-xl px-3 py-7 hover:bg-white lg:justify-start;
