@@ -8,6 +8,7 @@ const Card = ({
   user_name,
   show_balance = true,
 }: CardProps) => {
+  console.log(account);
   return (
     <div
       className={"flex flex-col bg-transparent"}
@@ -19,7 +20,11 @@ const Card = ({
               {user_name || account.name}
             </h1>
             <p className="bg-transparent font-black">
-              {formatAmount(account.balance)}
+              {formatAmount(
+                account.availableBalance
+                  ? account.availableBalance
+                  : 123.45
+              )}
             </p>
           </div>
           <article

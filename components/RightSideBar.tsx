@@ -16,7 +16,7 @@ const RightSideBar = ({
         <section className="profile">
           <div className="profile-image">
             <span className="text-5xl font-bold text-white bg-transparent">
-              {user.name.charAt(0)}
+              {user.firstName.charAt(0)}
             </span>
           </div>
           <div className="profile-info">

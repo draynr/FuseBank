@@ -34,7 +34,7 @@ declare interface LoginParameters {
 }
 declare interface PlaidProps {
   user: User;
-  variant: string;
+  variant?: string;
 }
 declare interface RegisterParameters {
   email: string;
@@ -64,6 +64,7 @@ declare interface TopSectionProps {
   user_name: string;
   subtext: string;
 }
+
 declare type User = {
   $id: string;
   email: string;
@@ -86,8 +87,27 @@ declare type Bank = {
   bank_id: string;
   access_token: string;
   funding_source: string;
-  user_id: string;
+  userId: string;
   invite_id: string;
+};
+
+declare type Transaction = {
+  id: string;
+  $id: string;
+  name: string;
+  paymentChannel: string;
+  type: string;
+  accountId: string;
+  amount: number;
+  pending: boolean;
+  category: string;
+  date: string;
+  image: string;
+  type: string;
+  $createdAt: string;
+  channel: string;
+  senderBankId: string;
+  receiverBankId: string;
 };
 
 declare interface getUserInfoProps {
@@ -95,7 +115,7 @@ declare interface getUserInfoProps {
 }
 
 declare interface createBankAccountProps {
-  user_id: string;
+  userId: string;
   bank_id: string;
   account_id: string;
   access_token: string;
@@ -134,3 +154,37 @@ declare interface TransferParams {
   destinationFundingSourceUrl: string;
   amount: string;
 }
+
+// banking props
+
+declare interface getAccountsProps {
+  userId: string;
+}
+
+declare interface getAccountProps {
+  appwriteItemId: string;
+}
+declare interface getInstitutionProps {
+  institutionId: string;
+}
+
+declare interface getTransactionsProps {
+  accessToken: string;
+}
+
+declare interface getBanksProps {
+  userId: string;
+}
+declare interface getBankProps {
+  documentId: string;
+}
+
+declare type SearchParamProps = {
+  params: { [key: string]: string };
+  searchParams: {
+    [key: string]:
+      | string
+      | string[]
+      | undefined;
+  };
+};

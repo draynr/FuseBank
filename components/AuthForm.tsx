@@ -56,7 +56,6 @@ const AuthForm = ({ type }: AuthProps) => {
   ) => {
     setIsLoading(true);
     try {
-      console.log(data);
       const userStruct = {
         email: data.email!,
         password: data.password!,
@@ -73,17 +72,14 @@ const AuthForm = ({ type }: AuthProps) => {
         const newUserStruct = await register(
           userStruct
         );
-        console.log(userStruct);
-        // console.log(newUserStruct);
         setUser(newUserStruct);
-      } else if (type == "login") {
+      }
+      if (type == "login") {
         const loginInfo = {
           email: data.email,
           password: data.password,
         };
-        // console.log(loginInfo);
         const response = await login(loginInfo);
-        // console.log(response);
         if (response) {
           router.push("/");
         }

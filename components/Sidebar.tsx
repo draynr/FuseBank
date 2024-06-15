@@ -6,6 +6,7 @@ import SideItems from "../constants/index";
 import { cn } from "../lib/utils";
 import { usePathname } from "next/navigation";
 import Footer from "./Footer";
+import PlaidLinking from "./PlaidLinking";
 
 const Sidebar = ({ user }: SideProps) => {
   const path_name = usePathname();
@@ -67,7 +68,7 @@ const Sidebar = ({ user }: SideProps) => {
               </Link>
             );
           })}
-          USER
+          <PlaidLinking user={user} />
         </nav>
         <Footer type="mobile" user={user} />
       </>

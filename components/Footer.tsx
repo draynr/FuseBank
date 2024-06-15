@@ -1,6 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import { logout } from "../lib/actions/actions";
+import {
+  getLoggedInUser,
+  logout,
+} from "../lib/actions/actions";
 import {
   redirect,
   useRouter,
@@ -17,6 +20,7 @@ const Footer = ({
       router.push("/login");
     }
   };
+
   return (
     <footer className="footer">
       <div
@@ -27,7 +31,7 @@ const Footer = ({
         }
       >
         <p className="text-xl font-bold text-white bg-transparent">
-          {user.name[0]}
+          {user.firstName[0]}
         </p>
       </div>
       <div
@@ -38,7 +42,7 @@ const Footer = ({
         }
       >
         <h1 className="text-[14px] truncate font-semibold text-white">
-          {user.name}
+          {user.firstName} {user.lastName}
         </h1>
         <p className="truncate font-normal text-gray-300 text-[12px]">
           {user.email}

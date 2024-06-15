@@ -36,7 +36,7 @@ const {
 } = process.env;
 
 export const createBankAccount = async ({
-  user_id,
+  userId,
   bank_id,
   account_id,
   access_token,
@@ -52,7 +52,7 @@ export const createBankAccount = async ({
         BANK_COLLECTION_ID!,
         ID.unique(),
         {
-          user_id,
+          userId,
           bank_id,
           account_id,
           access_token,
@@ -79,8 +79,20 @@ export const login = async ({
         email,
         password
       );
-    // console.log("123");
-    return JSON.parse(JSON.stringify(response));
+    cookies().set(
+      "appwrite-session",
+      response.secret,
+      {
+        path: "/",
+        httpOnly: true,
+        sameSite: "strict",
+        secure: true,
+      }
+    );
+    const user = await getUserInfo({
+      userId: response.userId,
+    });
+    return JSON.parse(JSON.stringify(user));
   } catch (e) {
     console.log(e);
   }
@@ -164,16 +176,16 @@ export async function getLoggedInUser() {
   try {
     const { account } =
       await createSessionClient();
-    console.log("hello");
-    debugger;
-    console.log("hello");
     const response = await account.get();
     const user = await getUserInfo({
       userId: response.$id,
     });
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
-    console.log("wtf");
+    console.log(
+      "Error getting logged in user:",
+      error
+    );
     return null;
   }
 }
@@ -275,17 +287,62 @@ export const exchangePublicToken = async ({
         bankName: data.name,
       });
     if (!funding_source) throw Error;
-    await createBankAccount({
-      user_id: user.$id,
+    const args = {
+      userId: user.$id,
       bank_id: item_id,
       account_id: data.account_id,
       access_token: access_token,
       funding_source: funding_source,
       invite_id: encrypt(data.account_id),
-    });
+    };
+    await createBankAccount(args);
     revalidatePath("/");
-    return "success";
+    return JSON.parse(
+      JSON.stringify({
+        publicTokenExchange: "complete",
+      })
+    );
   } catch (e) {
     console.log(e);
+  }
+};
+export const getBanks = async ({
+  userId,
+}: getBanksProps) => {
+  try {
+    const { database } =
+      await createAdminClient();
+    const banks = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    );
+    console.log(banks);
+
+    return JSON.parse(
+      JSON.stringify(banks.documents)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getBank = async ({
+  documentId,
+}: getBankProps) => {
+  try {
+    const { database } =
+      await createAdminClient();
+
+    const bank = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("$id", [documentId])]
+    );
+    return JSON.parse(
+      JSON.stringify(bank.documents[0])
+    );
+  } catch (error) {
+    console.log(error);
   }
 };

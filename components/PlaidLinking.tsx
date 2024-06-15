@@ -17,7 +17,7 @@ import {
 
 const PlaidLinking = ({
   user,
-  variant,
+  variant = "primary",
 }: PlaidProps) => {
   const [token, setToken] = useState("");
   const router = useRouter();
@@ -29,7 +29,6 @@ const PlaidLinking = ({
     };
     getLinkToken();
   }, [user]);
-  console.log(token);
   const onSuccess =
     useCallback<PlaidLinkOnSuccess>(
       async (public_token: string) => {
@@ -55,12 +54,12 @@ const PlaidLinking = ({
           disabled={!ready}
           className="plaid-link-primary"
         >
-          Start Link
+          Connect
         </Button>
       ) : variant === "ghost" ? (
-        <Button>Start Link</Button>
+        <Button>Connect</Button>
       ) : (
-        <Button>Start Link</Button>
+        <Button>Connectx</Button>
       )}
     </>
   );

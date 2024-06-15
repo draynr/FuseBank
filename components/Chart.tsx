@@ -11,20 +11,26 @@ import { Doughnut } from "react-chartjs-2";
 Chart_1.register(ArcElement, Tooltip, Legend);
 
 const Chart = ({ accounts }: ChartProps) => {
+  const accountNames = accounts.map(
+    x => x.name
+  );
+  const balances = accounts.map(
+    x => x.currentBalance
+  );
   const data = {
     datasets: [
       {
         label: "Bank",
-        data: [1000, 2000, 3000],
+        data: balances,
         backgroundColor: [
           "#FFFFFF",
           "#C5C9D0",
           "#868686",
         ],
-        borderColor: "#000000",
+        borderColor: "#FFF",
       },
     ],
-    labels: ["Bank 1", "Bank 2", "Bank 3"],
+    labels: accountNames,
   };
 
   return (
