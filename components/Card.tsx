@@ -8,7 +8,6 @@ const Card = ({
   user_name,
   show_balance = true,
 }: CardProps) => {
-  console.log(account);
   return (
     <div
       className={"flex flex-col bg-transparent"}

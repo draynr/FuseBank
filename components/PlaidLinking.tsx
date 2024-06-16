@@ -21,7 +21,6 @@ const PlaidLinking = ({
 }: PlaidProps) => {
   const [token, setToken] = useState("");
   const router = useRouter();
-  // console.log(user.$id);
   useEffect(() => {
     const getLinkToken = async () => {
       const data = await createLinkToken(user);

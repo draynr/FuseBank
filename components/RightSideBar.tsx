@@ -8,7 +8,7 @@ const RightSideBar = ({
   transactions,
   banks,
 }: RightSideBarProps) => {
-  // console.log(user);
+  // (user);
   return (
     <aside className="right-sidebar">
       <section className="flex flex-col pb-8">

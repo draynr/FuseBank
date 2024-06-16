@@ -85,7 +85,7 @@ const AuthForm = ({ type }: AuthProps) => {
         }
       }
     } catch (e) {
-      console.log(e);
+      console.log("error");
     } finally {
       setIsLoading(false);
     }

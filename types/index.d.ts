@@ -171,6 +171,12 @@ declare interface getInstitutionProps {
 declare interface getTransactionsProps {
   accessToken: string;
 }
+declare interface TransactionsProps {
+  accounts: Account[];
+  transactions: Transaction[];
+  appwriteItemId: string;
+  page: number;
+}
 
 declare interface getBanksProps {
   userId: string;

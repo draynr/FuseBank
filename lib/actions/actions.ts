@@ -125,7 +125,6 @@ export const register = async ({
       dateOfBirth: data.dateOfBirth,
       ssn: data.ssn,
     };
-    // console.log(args);
     const dwollaCustomerUrl =
       await createDwollaCustomer(args);
     if (!dwollaCustomerUrl) {
@@ -317,7 +316,6 @@ export const getBanks = async ({
       BANK_COLLECTION_ID!,
       [Query.equal("userId", [userId])]
     );
-    console.log(banks);
 
     return JSON.parse(
       JSON.stringify(banks.documents)
