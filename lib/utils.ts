@@ -18,7 +18,6 @@ export function formatCurrentBalance(
   return formatter.format(balance);
 }
 
-export const getTransactionsByBankId;
 export function extractCustomerIdFromUrl(
   url: string
 ) {

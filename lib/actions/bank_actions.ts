@@ -13,6 +13,7 @@ import { plaidClient } from "../server/plaid";
 
 // import { getTransactionsByBankId } from "./transaction_actions";
 import { getBanks, getBank } from "./actions";
+import { getTransactionsByBankId } from "./transaction_actions";
 
 // Get multiple bank accounts
 export const getAccounts = async ({
@@ -102,44 +103,44 @@ export const getAccount = async ({
     // get account info from plaid
     const accountsResponse =
       await plaidClient.accountsGet({
-        access_token: bank.accessToken,
+        access_token: bank.access_token,
       });
     const accountData =
       accountsResponse.data.accounts[0];
 
     // get transfer transactions from appwrite
-    const transferTransactionsData =
-      await getTransactionsByBankId({
-        bankId: bank.$id,
-      });
+    // const transferTransactionsData =
+    //   await getTransactionsByBankId({
+    //     bankId: bank.$id,
+    //   });
 
-    const transferTransactions =
-      transferTransactionsData.documents.map(
-        (transferData: Transaction) => ({
-          id: transferData.$id,
-          name: transferData.name!,
-          amount: transferData.amount!,
-          date: transferData.$createdAt,
-          paymentChannel: transferData.channel,
-          category: transferData.category,
-          type:
-            transferData.senderBankId ===
-            bank.$id
-              ? "debit"
-              : "credit",
-        })
-      );
+    // const transferTransactions =
+    //   transferTransactionsData.documents.map(
+    //     (transferData: Transaction) => ({
+    //       id: transferData.$id,
+    //       name: transferData.name!,
+    //       amount: transferData.amount!,
+    //       date: transferData.$createdAt,
+    //       paymentChannel: transferData.channel,
+    //       category: transferData.category,
+    //       type:
+    //         transferData.senderBankId ===
+    //         bank.$id
+    //           ? "debit"
+    //           : "credit",
+    //     })
+    //   );
 
-    // get institution info from plaid
+    // // get institution info from plaid
     const institution = await getInstitution({
       institutionId:
         accountsResponse.data.item
           .institution_id!,
     });
 
-    const transactions = await getTransactions({
-      accessToken: bank?.accessToken,
-    });
+    // const transactions = await getTransactions({
+    //   accessToken: bank?.accessToken,
+    // });
 
     const account = {
       id: accountData.account_id,
@@ -157,19 +158,19 @@ export const getAccount = async ({
     };
 
     // sort transactions by date such that the most recent transaction is first
-    const allTransactions = [
-      ...transactions,
-      //   ...transferTransactions,
-    ].sort(
-      (a, b) =>
-        new Date(b.date).getTime() -
-        new Date(a.date).getTime()
-    );
+    // const allTransactions = [
+    //   ...transactions,
+    //   //   ...transferTransactions,
+    // ].sort(
+    //   (a, b) =>
+    //     new Date(b.date).getTime() -
+    //     new Date(a.date).getTime()
+    // );
 
     return JSON.parse(
       JSON.stringify({
         data: account,
-        transactions: allTransactions,
+        // transactions: allTransactions,
       })
     );
   } catch (error) {

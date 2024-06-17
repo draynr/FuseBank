@@ -80,6 +80,8 @@
   .card-icon {
     @apply flex flex-col items-end justify-between rounded-r-[20px] gradient bg-cover bg-center bg-no-repeat py-5 pr-5 ml-2;
   }
+  .category-badge {
+  }
   .footer {
     @apply flex cursor-pointer items-center justify-between gap-2 py-6;
   }

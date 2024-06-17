@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
+  cn,
   formatAmount,
   formatDateTime,
   removeSpecialChars,
@@ -17,6 +18,17 @@ import {
 const TransactionTable = ({
   transactions,
 }: TransactionTableProps) => {
+  const getCategory = ({
+    category,
+  }: CategoryProps) => {
+    return (
+      <div className={cn("category-badge")}>
+        <div
+          className={cn("size-2 rounded-full")}
+        ></div>
+      </div>
+    );
+  };
   return (
     <div>
       <Table>
@@ -47,7 +59,16 @@ const TransactionTable = ({
                 transaction.amount
               );
               return (
-                <TableRow key={transaction.id}>
+                <TableRow
+                  className={`${
+                    transaction.type ===
+                    ("debit" ||
+                      amount[0] === "-")
+                      ? "text-red-500"
+                      : "text-green-500"
+                  } !over:bg-none`}
+                  key={transaction.id}
+                >
                   <TableCell>
                     {
                       formatDateTime(
@@ -57,22 +78,30 @@ const TransactionTable = ({
                       ).dateTime
                     }
                   </TableCell>
-                  <TableCell>
-                    <div>
-                      <h1>
+                  <TableCell className="max-w-[250px] pl-2 pr-10">
+                    <div className="flex items-center gap-3">
+                      <h1 className="text-[14px] truncate font-semibold">
                         {removeSpecialChars(
                           transaction.name
                         )}
                       </h1>
                     </div>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="pl-2 pr-10">
                     {transaction.paymentChannel}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="pl-2 pr-10">
                     {transaction.category}
                   </TableCell>
-                  <TableCell>
+                  <TableCell
+                    className={`${
+                      transaction.type ===
+                        "debit" ||
+                      amount[0] === "-"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    } pl-2 pr-10 font-semibold`}
+                  >
                     {transaction.type ===
                     "debit"
                       ? -amount

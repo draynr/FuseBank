@@ -103,7 +103,6 @@ declare type Transaction = {
   category: string;
   date: string;
   image: string;
-  type: string;
   $createdAt: string;
   channel: string;
   senderBankId: string;
@@ -235,3 +234,16 @@ declare type AccountTypes =
   | "loan "
   | "investment"
   | "other";
+
+/* TRANSACTIONS */
+declare interface CreateTransactionProps {
+  transaction: Transaction;
+}
+
+declare interface getTransactionsByBankIdProps {
+  bankId: string;
+}
+
+declare interface CategoryProps {
+  category: string;
+}
