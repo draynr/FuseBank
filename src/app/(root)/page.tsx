@@ -28,6 +28,7 @@ const Home = async ({
   const account = await getAccount({
     appwriteItemId,
   });
+  console.log(account);
   return (
     <section className="home">
       <div className="home-content">

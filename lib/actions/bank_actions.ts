@@ -13,7 +13,6 @@ import { plaidClient } from "../server/plaid";
 
 // import { getTransactionsByBankId } from "./transaction_actions";
 import { getBanks, getBank } from "./actions";
-import { Account } from "node-appwrite";
 
 // Get multiple bank accounts
 export const getAccounts = async ({
@@ -109,27 +108,27 @@ export const getAccount = async ({
       accountsResponse.data.accounts[0];
 
     // get transfer transactions from appwrite
-    // const transferTransactionsData =
-    //   await getTransactionsByBankId({
-    //     bankId: bank.$id,
-    //   });
+    const transferTransactionsData =
+      await getTransactionsByBankId({
+        bankId: bank.$id,
+      });
 
-    // const transferTransactions =
-    //   transferTransactionsData.documents.map(
-    //     (transferData: Transaction) => ({
-    //       id: transferData.$id,
-    //       name: transferData.name!,
-    //       amount: transferData.amount!,
-    //       date: transferData.$createdAt,
-    //       paymentChannel: transferData.channel,
-    //       category: transferData.category,
-    //       type:
-    //         transferData.senderBankId ===
-    //         bank.$id
-    //           ? "debit"
-    //           : "credit",
-    //     })
-    //   );
+    const transferTransactions =
+      transferTransactionsData.documents.map(
+        (transferData: Transaction) => ({
+          id: transferData.$id,
+          name: transferData.name!,
+          amount: transferData.amount!,
+          date: transferData.$createdAt,
+          paymentChannel: transferData.channel,
+          category: transferData.category,
+          type:
+            transferData.senderBankId ===
+            bank.$id
+              ? "debit"
+              : "credit",
+        })
+      );
 
     // get institution info from plaid
     const institution = await getInstitution({

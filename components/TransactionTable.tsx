@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import {
   formatAmount,
+  formatDateTime,
   removeSpecialChars,
 } from "../lib/utils";
 
@@ -31,6 +32,9 @@ const TransactionTable = ({
             <TableHead className="px-2 max-md:hidden">
               Type
             </TableHead>
+            <TableHead className="px-2 max-md:hidden">
+              Category
+            </TableHead>
             <TableHead className="text-right">
               Amount
             </TableHead>
@@ -45,6 +49,15 @@ const TransactionTable = ({
               return (
                 <TableRow key={transaction.id}>
                   <TableCell>
+                    {
+                      formatDateTime(
+                        new Date(
+                          transaction.date
+                        )
+                      ).dateTime
+                    }
+                  </TableCell>
+                  <TableCell>
                     <div>
                       <h1>
                         {removeSpecialChars(
@@ -53,7 +66,18 @@ const TransactionTable = ({
                       </h1>
                     </div>
                   </TableCell>
-                  <TableCell></TableCell>
+                  <TableCell>
+                    {transaction.paymentChannel}
+                  </TableCell>
+                  <TableCell>
+                    {transaction.category}
+                  </TableCell>
+                  <TableCell>
+                    {transaction.type ===
+                    "debit"
+                      ? -amount
+                      : amount}
+                  </TableCell>
                 </TableRow>
               );
             }
