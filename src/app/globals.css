@@ -62,6 +62,15 @@
   .banks {
     @apply flex flex-col justify-between gap-2 px-6 py-4;
   }
+  .banktab-item {
+    @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
+  }
+  .bank-info {
+    @apply gap-[18px] flex p-4 transition-all border bg-slate-100 border-transparent;
+  }
+  .bank-info_content {
+    @apply flex flex-1 items-center justify-between gap-2 overflow-hidden;
+  }
   .banner {
     @apply h-[120px] rounded-xl w-full bg-gradient-to-r from-slate-400 to-gray-200 bg-cover bg-no-repeat;
   }
@@ -166,6 +175,9 @@
   }
   .recent-transactions-label {
     @apply text-[18px] md:text-[22px] font-semibold text-slate-200;
+  }
+  .recent-transactions-tablist {
+    @apply custom-scrollbar mb-8 flex w-full flex-nowrap;
   }
 
   .root-layout {

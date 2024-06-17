@@ -24,6 +24,7 @@
     "node-appwrite": "^13.0.0",
     "nodemon": "^3.1.2",
     "plaid": "^24.0.0",
+    "query-string": "^9.0.0",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-countup": "^6.5.3",

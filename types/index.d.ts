@@ -194,3 +194,44 @@ declare type SearchParamProps = {
       | undefined;
   };
 };
+declare type TransactionTableProps = {
+  transactions: Transaction[];
+};
+
+declare type Account = {
+  id: string;
+  availableBalance: number;
+  currentBalance: number;
+  officialName: string;
+  mask: string;
+  institutionId: string;
+  name: string;
+  type: string;
+  subtype: string;
+  appwriteItemId: string;
+  shareableId: string;
+};
+
+declare interface BankTabProps {
+  account: Account;
+  appwriteItemId?: string;
+}
+
+declare interface BankInfoProps {
+  account: Account;
+  appwriteItemId: string;
+  type: string;
+}
+
+declare interface UrlQueryParams {
+  params: string;
+  key: string;
+  value: string;
+}
+
+declare type AccountTypes =
+  | "depository"
+  | "credit"
+  | "loan "
+  | "investment"
+  | "other";

@@ -12,6 +12,7 @@ import RecentTransactions from "../../../components/RecentTransactions";
 const Home = async ({
   searchParams: { id, page },
 }: SearchParamProps) => {
+  const currentPage = Number(page as string);
   const logged_in = await getLoggedInUser();
   const accounts = await getAccounts({
     userId: logged_in.$id,
@@ -50,7 +51,12 @@ const Home = async ({
             }
           />
         </header>
-        <RecentTransactions />
+        <RecentTransactions
+          accounts={accounts?.data}
+          transactions={account?.transactions}
+          appwriteItemId={appwriteItemId}
+          page={currentPage}
+        />
       </div>
     </section>
   );

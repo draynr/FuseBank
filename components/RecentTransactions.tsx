@@ -6,6 +6,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "../src/components/ui/tabs";
+import { BankTab } from "./BankTab";
+import BankInfo from "./BankInfo";
+import TransactionTable from "./TransactionTable";
 
 const RecentTransactions = ({
   accounts,
@@ -23,9 +26,43 @@ const RecentTransactions = ({
           href={`/transaction-history/?id=${appwriteItemId}`}
           className="view-all-btn"
         >
-          View more{" "}
+          View more
         </Link>
       </header>
+      <Tabs
+        defaultValue={appwriteItemId}
+        className="text-white w-full"
+      >
+        <TabsList className="recent-transactions-tablist">
+          {accounts.map((account: Account) => (
+            <TabsTrigger
+              key={account.id}
+              value={account.appwriteItemId}
+            >
+              <BankTab
+                key={account.id}
+                account={account}
+                appwriteItemId={appwriteItemId}
+              ></BankTab>
+            </TabsTrigger>
+          ))}
+        </TabsList>
+
+        {accounts.map((account: Account) => (
+          <TabsContent
+            key={account.id}
+            value={account.appwriteItemId}
+            className="space-y-4"
+          >
+            <BankInfo
+              account={account}
+              appwriteItemId={appwriteItemId}
+              type="full"
+            />
+            <TransactionTable />
+          </TabsContent>
+        ))}
+      </Tabs>
     </section>
   );
 };
